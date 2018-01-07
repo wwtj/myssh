@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<form-beans>
+		<form-bean name="userForm" type="com.mlf.web.forms.UserForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action path="/login" parameter="flag" name="userForm">
+			<forward name="success" path="/WEB-INF/main_frame.jsp" />
+			<forward name="fail" path="/WEB-INF/login.jsp" />
+		</action>
+	</action-mappings>
+
+	<!-- 配置代理请求处理DelegatingRequestProcessor：
+	在struts配置文件中添加进spring的请求控制器，该请求控制器会先根据action的path属性值到spring容器中寻找跟该属性值同名的bean。
+	如果寻找到即使用该bean处理用户请求
+	 -->
+	<controller>
+		<set-property property="processorClass"
+			value="org.springframework.web.struts.DelegatingRequestProcessor" />
+	</controller>
+
+</struts-config>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.mlf.domain">
+	<class name="User" table="user">
+		<!-- 主键生成策略 -->
+		<id name="userId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+
+		<property name="userName" type="java.lang.String">
+			<column name="userName" not-null="true" length="50" />
+		</property>
+		
+		<property name="pwd" type="java.lang.String">
+			<column name="pwd" not-null="true" length="50" />
+		</property>
+		
+		<property name="tel" type="java.lang.String">
+			<column name="tel" not-null="true" length="50" />
+		</property>
+		
+		<property name="identityId" type="java.lang.String">
+			<column name="identityId" not-null="true" length="50" />
+		</property>
+		
+		<property name="balance" type="java.lang.Double">
+			<column name="balance" not-null="true"/>
+		</property>
+
+		<!-- 一个用户只能属于一个身份  name是名称（要与该实体类中声明的类对象的名字相同），column是外键-->
+		<many-to-one name="identity" column="identity_id"/>
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.mlf.domain">
+	<class name="Identity" table="identity" lazy="false">
+		<!-- 主键生成策略 -->
+		<id name="identityId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+
+		<property name="identityName" type="java.lang.String">
+			<column name="identityName" not-null="true" length="50" />
+		</property>
+		
+		<!-- 一个身份可以有多个用户 -->
+		<set name="userSet"> <!-- name是实体类中集合对象的名字 -->
+			<key column="identity_id"/> <!-- key是外键，要与[属于该实体类的实体类]的映射文件里面写的外键名字一样 -->
+			<one-to-many class="com.mlf.domain.User"/>
+		</set>
+
+	</class>
+
+</hibernate-mapping>
